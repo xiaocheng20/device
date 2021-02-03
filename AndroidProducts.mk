@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/exthm_gemini.mk
+    $(LOCAL_DIR)/ancient_gemini.mk
 
 COMMON_LUNCH_CHOICES := \
-    exthm_gemini-user \
-    exthm_gemini-userdebug \
-    exthm_gemini-eng
+    ancient_gemini-user \
+    ancient_gemini-userdebug \
+    ancient_gemini-eng
