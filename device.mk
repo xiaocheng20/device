@@ -79,9 +79,9 @@ PRODUCT_PACKAGES += \
     init.tfa.sh \
     tinyplay
 
-# Darkness Kernel Profiles
+# Jerry Kernel Profiles
 PRODUCT_PACKAGES += \
-    init.darkness.rc \
+    init.Jerry.rc \
     init.spectrum.rc \
     init.spectrum.sh
 

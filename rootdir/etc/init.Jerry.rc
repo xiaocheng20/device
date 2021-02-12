@@ -1,8 +1,6 @@
+# Maintainer    : Jerry
 #
-# Device        : Xiaomi Mi 5 (gemini)
-# Maintainer    : MOVZX (MOVZX@Telegram.org)
-#
-# "You hate me, but you cannot defeat me..." quote from Medieval II Total War
+# 芜湖芜湖芜湖芜湖 --老鼠part(Special thanks @ movzx)
 #
 
 on boot
@@ -33,7 +31,6 @@ on boot
                 chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
                 write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor performance
 
-on darkness
     # Set CPU Parameters
         # Disable thermal hotplug to switch governor
             write /sys/module/msm_thermal/core_control/enabled 0
@@ -43,13 +40,6 @@ on darkness
             chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
             write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1593600
             write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 307200
-            # DarkEnergy
-                chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-                write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor darkenergy
-                chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/darkenergy/down_rate_limit_us
-                chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/darkenergy/up_rate_limit_us
-                write /sys/devices/system/cpu/cpu0/cpufreq/darkenergy/down_rate_limit_us 20000
-                write /sys/devices/system/cpu/cpu0/cpufreq/darkenergy/up_rate_limit_us 500
             # SchedUtil
                 chmod 777 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
                 write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor schedutil
@@ -64,13 +54,6 @@ on darkness
             chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
             write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2150400
             write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 307200
-            # DarkEnergy
-                chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-                write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor darkenergy
-                chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/darkenergy/down_rate_limit_us
-                chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/darkenergy/up_rate_limit_us
-                write /sys/devices/system/cpu/cpu2/cpufreq/darkenergy/down_rate_limit_us 20000
-                write /sys/devices/system/cpu/cpu2/cpufreq/darkenergy/up_rate_limit_us 500
             # SchedUtil
                 chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
                 write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor schedutil
@@ -97,14 +80,6 @@ on darkness
         write /dev/stune/rt/schedtune.sched_boost 50
         write /dev/stune/schedtune.sched_boost 20
         write /dev/stune/top-app/schedtune.sched_boost 30
-    #
-    # DevFreq
-        write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/mbps_zones "1525 5195 11863 13763"
-        write /sys/class/devfreq/soc:qcom,cpubw/governor "cpufreq"
-        write /sys/class/devfreq/soc:qcom,cpubw/min_freq 1525
-        write /sys/class/devfreq/soc:qcom,memlat-cpu0/governor "powersave"
-        write /sys/class/devfreq/soc:qcom,memlat-cpu2/governor "powersave"
-        write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
     #
     # Set Adreno GPU
         chmod 777 /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
@@ -199,11 +174,10 @@ on darkness
         stop thermal-engine
         start thermal-engine
     #
-    # Darkness Mods
+    # Jerry Mods(from darkness)
         setprop dalvik.vm.dex2oat-threads 4
         setprop dalvik.vm.image-dex2oat-threads 4
         setprop debug.generate-debug-info false
-        setprop net.hostname Darkness
         setprop ro.data.large_tcp_window_size true
         setprop ro.sys.fw.dex2oat_thread_count 4
         setprop ro.sys.sdcardfs true
@@ -211,10 +185,10 @@ on darkness
         setprop wifi.supplicant_scan_interval 3600
 
 on property:dev.bootcomplete=1
-    # Fire up the Darkness!
-    # You hate me, but you cannot defeat me...
-        trigger darkness
-    # Sensor Fix
-        restorecon -rv /mnt/vendor/persist
-
-
+    # 设置完毕，开个机八
+  
+# Update cpusets now that boot is complete and we want better load balancing
+    write /dev/cpuset/top-app/cpus 0-3
+    write /dev/cpuset/foreground/cpus 0-2
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-2
