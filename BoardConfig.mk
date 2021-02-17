@@ -29,6 +29,12 @@ TARGET_BOARD_INFO_FILE ?= $(DEVICE_PATH)/board-info.txt
 # HIDL
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
+# HWUI
+HWUI_COMPILE_FOR_PERF := true
+
+# Memory Config
+MALLOC_SVELTE := true
+
 # Kernel
 TARGET_KERNEL_CONFIG := gemini_defconfig
 
