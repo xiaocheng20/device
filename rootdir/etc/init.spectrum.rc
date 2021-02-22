@@ -65,13 +65,14 @@ on property:persist.spectrum.profile=0
     # Dynamic SchedTune Boost
         write /dev/stune/foreground/schedtune.sched_boost 20
         write /dev/stune/rt/schedtune.sched_boost 50
+        write /dev/stune/rt/schedtune.boost 50
         write /dev/stune/schedtune.sched_boost 20
         write /dev/stune/top-app/schedtune.sched_boost 30
     #
     # DevFreq
         write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/mbps_zones "1525 5195 11863 13763"
         write /sys/class/devfreq/soc:qcom,cpubw/governor "cpufreq"
-        write /sys/class/devfreq/soc:qcom,cpubw/min_freq 1525
+        write /sys/class/devfreq/soc:qcom,cpubw/min_freq 13763
         write /sys/class/devfreq/soc:qcom,memlat-cpu0/governor "powersave"
         write /sys/class/devfreq/soc:qcom,memlat-cpu2/governor "powersave"
         write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
@@ -133,6 +134,7 @@ on property:persist.spectrum.profile=1
     # Dynamic SchedTune Boost
         write /dev/stune/foreground/schedtune.sched_boost 30
         write /dev/stune/rt/schedtune.sched_boost 60
+        write /dev/stune/rt/schedtune.boost 60
         write /dev/stune/schedtune.sched_boost 30
         write /dev/stune/top-app/schedtune.sched_boost 40
     #
@@ -253,6 +255,7 @@ on property:persist.spectrum.profile=3
     # Dynamic SchedTune Boost
         write /dev/stune/foreground/schedtune.sched_boost 40
         write /dev/stune/rt/schedtune.sched_boost 70
+        write /dev/stune/rt/schedtune.boost 70
         write /dev/stune/schedtune.sched_boost 40
         write /dev/stune/top-app/schedtune.sched_boost 50
     #

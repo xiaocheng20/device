@@ -32,7 +32,6 @@ on boot
             # Performance
                 chmod 777 /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
                 write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor performance
-
 on Jerry
     # Set CPU Parameters
         # Disable thermal hotplug to switch governor
@@ -81,13 +80,14 @@ on Jerry
     # Dynamic SchedTune Boost
         write /dev/stune/foreground/schedtune.sched_boost 20
         write /dev/stune/rt/schedtune.sched_boost 50
+        write /dev/stune/rt/schedtune.boost 50
         write /dev/stune/schedtune.sched_boost 20
         write /dev/stune/top-app/schedtune.sched_boost 30
     #
     # DevFreq
-        write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/mbps_zones "1525 5195 11863 13763"
+        write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/mbps_zones "4173 5195 11863 13763"
         write /sys/class/devfreq/soc:qcom,cpubw/governor "cpufreq"
-        write /sys/class/devfreq/soc:qcom,cpubw/min_freq 1525
+        write /sys/class/devfreq/soc:qcom,cpubw/min_freq 13763
         write /sys/class/devfreq/soc:qcom,memlat-cpu0/governor "powersave"
         write /sys/class/devfreq/soc:qcom,memlat-cpu2/governor "powersave"
         write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
@@ -113,22 +113,22 @@ on Jerry
         write /proc/sys/vm/vfs_cache_pressure 100
     #
     # Set I/O Scheduler
-        setprop sys.io.scheduler bfq
+        setprop sys.io.scheduler cfq
         # SDA
             write /sys/block/sda/queue/add_random 0
             write /sys/block/sda/queue/iostats 0
             write /sys/block/sda/queue/read_ahead_kb 128
-            write /sys/block/sda/queue/scheduler bfq
+            write /sys/block/sda/queue/scheduler cfq
         # SDE
             write /sys/block/sde/queue/add_random 0
             write /sys/block/sde/queue/iostats 0
             write /sys/block/sde/queue/read_ahead_kb 128
-            write /sys/block/sde/queue/scheduler bfq
+            write /sys/block/sde/queue/scheduler cfq
         # DM-0
             write /sys/block/dm-0/queue/add_random 0
             write /sys/block/dm-0/queue/iostats 0
             write /sys/block/dm-0/queue/read_ahead_kb 128
-            write /sys/block/dm-0/queue/scheduler bfq
+            write /sys/block/dm-0/queue/scheduler cfq
     #
     # SCSI Tweaks
         write /sys/module/scsi_mod/parameters/use_blk_mq Y
